@@ -120,8 +120,8 @@ const Navbar = () => {
             </button>
           </div>
         </form>
-        <div className=" rounded-full bg-zinc-900 hover:bg-zinc-700 p-3">
-          <TiMicrophone className="text-lg sm:text-xl   cursor-pointer  hidden sm:block" />
+        <div className="rounded-full bg-zinc-900 hover:bg-zinc-700 p-3 hidden sm:block">
+          <TiMicrophone className="text-lg sm:text-xl cursor-pointer" />
         </div>
       </div>
       <div className="flex gap-3 sm:gap-5 items-center text-lg sm:text-xl">

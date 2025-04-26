@@ -20,3 +20,7 @@ body {
     background-color: #c7c7c7;
     border-radius: 1rem;
 }
+
+.infinite-scroll-component__outerdiv {
+    width: 100% !important;
+}
