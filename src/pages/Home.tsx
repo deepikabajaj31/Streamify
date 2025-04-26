@@ -24,11 +24,11 @@ const Home = () => {
   }, [dispatch]);
 
   return (
-    <div className="h-screen overflow-hidden">
+    <div className="min-h-screen">
       <div className="h-[7.5vh]">
         <Navbar />
       </div>
-      <div className="flex flex-col sm:flex-row h-[calc(100vh-7.5vh)]">
+      <div className="flex flex-col sm:flex-row flex-1 overflow-hidden">
         <Sidebar />
         {videos.length ? (
           <InfiniteScroll
@@ -37,8 +37,7 @@ const Home = () => {
             hasMore={videos.length < 500}
             loader={<Spinner />}
             className="w-full overflow-auto"
-            height="100%"
-            style={{width:"100%"}}
+            style={{ width: "100%" }}
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-6 sm:gap-y-10 lg:gap-y-14 gap-x-4 sm:gap-x-6 lg:gap-x-8 p-2 sm:p-4 lg:p-8 w-full max-w-screen-xl mx-auto justify-items-center">
               {videos.map((item: HomePageVideos, index: number) => {
