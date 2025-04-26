@@ -1,30 +1,33 @@
 export const parseVideoDuration = (duration: string): string => {
-  const durationParts: string[] = duration
-    .replace("PT", "")
-    .replace("H", ":")
-    .replace("M", ":")
-    .replace("S", "")
-    .split(":");
-
-  if (durationParts.length === 3) {
-    return `${durationParts[0]}:${
-      parseInt(durationParts[1]) < 9 ? `0${durationParts[1]}` : durationParts[1]
-    }:${
-      parseInt(durationParts[2]) < 9 ? `0${durationParts[2]}` : durationParts[2]
-    }`;
+  // Return empty string for invalid or empty input
+  if (!duration || !duration.startsWith("PT")) {
+    return "";
   }
 
-  if (durationParts.length === 2) {
-    return `${durationParts[0]}:${
-      parseInt(durationParts[1]) < 9 ? `0${durationParts[1]}` : durationParts[1]
-    }`;
+  // Extract hours, minutes, seconds using regex
+  const regex = /PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/;
+  const matches = duration.match(regex);
+
+  if (!matches) {
+    return "";
   }
 
-  if (durationParts.length === 1) {
-    return `0:${
-      parseInt(durationParts[0]) < 9 ? `0${durationParts[0]}` : durationParts[0]
-    }`;
-  }
+  // Parse hours, minutes, seconds, defaulting to 0 if not present
+  const hours = parseInt(matches[1] || "0", 10);
+  const minutes = parseInt(matches[2] || "0", 10);
+  const seconds = parseInt(matches[3] || "0", 10);
 
-  return "";
+  // Format hours, minutes, seconds with leading zeros
+  const formattedHours = hours > 0 ? `${hours}:` : "";
+  const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+  const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+
+  // Return formatted duration
+  if (hours > 0) {
+    return `${formattedHours}${formattedMinutes}:${formattedSeconds}`;
+  }
+  if (minutes > 0) {
+    return `${minutes}:${formattedSeconds}`;
+  }
+  return `0:${formattedSeconds}`;
 };
