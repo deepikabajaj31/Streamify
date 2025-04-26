@@ -7,44 +7,46 @@ import { HomePageVideos } from "../Types";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Spinner from "../components/Spinner";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom"; // Add useLocation
+import { useNavigate, useLocation } from "react-router-dom";
 import { getSearchPageVideos } from "../store/reducers/getSearchPageVideos";
 
 const Search = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const location = useLocation(); // Track location changes
+  const location = useLocation();
   const videos = useSelector((state: RootState) => state.youtubeApp.videos);
-  const searchTerm = useSelector((state: RootState) => state.youtubeApp.searchTerm);
+  const searchTerm = useSelector(
+    (state: RootState) => state.youtubeApp.searchTerm
+  );
 
   useEffect(() => {
-    // Only run on initial mount or when location changes to /search
     if (searchTerm === "") {
       navigate("/");
     } else {
       dispatch(youtubeActions.clearVideos());
       store.dispatch(getSearchPageVideos(false));
     }
-  }, [dispatch, navigate, location.pathname]); // Depend on location.pathname instead of searchTerm
+  }, [dispatch, navigate, location.pathname]);
 
   return (
-    <div className="max-h-screen overflow-hidden">
-      <div style={{ height: "7.5vh" }}>
+    <div className="h-screen overflow-hidden">
+      <div className="h-[7.5vh]">
         <Navbar />
       </div>
-      <div className="flex" style={{ height: "92.5vh" }}>
+      <div className="flex flex-col sm:flex-row h-[calc(100vh-7.5vh)]">
         <Sidebar />
         {videos.length ? (
-          <div className="pl-8 flex flex-col gap-5 w-full">
+          <div className="pl-4 sm:pl-6 lg:pl-8 flex flex-col gap-4 sm:gap-5 w-full overflow-auto">
             <InfiniteScroll
               dataLength={videos.length}
               next={() => store.dispatch(getSearchPageVideos(true))}
               hasMore={videos.length < 500}
               loader={<Spinner />}
+              className="h-[calc(100vh-7.5vh)]"
               height={700}
             >
               {videos.map((item: HomePageVideos, index: number) => (
-                <div className="my-5" key={index}>
+                <div className="my-4 sm:my-5" key={index}>
                   <SearchCard data={item} />
                 </div>
               ))}
