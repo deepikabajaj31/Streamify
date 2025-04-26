@@ -28,7 +28,7 @@ const Home = () => {
       <div className="h-[7.5vh]">
         <Navbar />
       </div>
-      <div className="flex flex-col sm:flex-row flex-1 overflow-x-hidden">
+      <div className="flex" style={{ height: "92.5vh" }}>
         <Sidebar />
         {videos.length ? (
           <InfiniteScroll
@@ -37,6 +37,8 @@ const Home = () => {
             hasMore={videos.length < 500}
             loader={<Spinner />}
             className="w-full overflow-auto"
+            height="100%"
+            style={{ width: "100%" }}
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-6 sm:gap-y-10 lg:gap-y-14 gap-x-4 sm:gap-x-6 lg:gap-x-8 p-2 sm:p-4 lg:p-8 w-full max-w-screen-xl mx-auto justify-items-center overflow-hidden">
               {videos.map((item: HomePageVideos, index: number) => {

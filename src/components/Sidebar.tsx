@@ -118,7 +118,7 @@ const textLinks = [
 
 const Sidebar = () => {
   return (
-    <div className="w-full sm:w-64 md:w-1/5 bg-[#212121] mt-3 overflow-auto pb-8 max-h-[calc(100vh-7.5vh)] hidden sm:block">
+    <div className="w-full sm:w-64 md:w-1/5.5 bg-[#212121] mt-3 overflow-auto pb-8 max-h-[calc(100vh-7.5vh)] hidden sm:block">
       <ul className="flex flex-col border-b-2 border-gray-700">
         {mainLinks.map(({ icon, name }) => {
           return (
