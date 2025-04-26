@@ -73,6 +73,11 @@ const Navbar = () => {
     setLastSearchTerm("");
   };
 
+  const handleLogoClick = () => {
+    dispatch(youtubeActions.clearVideos()); // Clear videos when navigating to homepage
+    dispatch(youtubeActions.clearSearchTerm()); // Optionally clear search term
+  };
+
   let url: string | undefined;
   if (user) url = auth.currentUser?.photoURL;
 
@@ -82,7 +87,7 @@ const Navbar = () => {
         <div>
           <GiHamburgerMenu />
         </div>
-        <Link to="/">
+        <Link to="/" onClick={handleLogoClick}>
           <div className="flex gap-2 items-center">
             <img src={logo} alt="streamify" style={{ width: "60%" }} />
             <span className="text-xl font-medium">Streamify</span>

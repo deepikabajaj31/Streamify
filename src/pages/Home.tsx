@@ -16,6 +16,7 @@ const Home = () => {
   });
 
   useEffect(() => {
+    dispatch(youtubeActions.clearVideos()); // Clear videos before fetching
     store.dispatch(getHomePageVideos(false));
     return () => {
       dispatch(youtubeActions.clearVideos());
