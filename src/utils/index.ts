@@ -1,0 +1,1 @@
+export { parseRecommendedData } from "./parseRecommendedData";
